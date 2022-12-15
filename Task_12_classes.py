@@ -105,20 +105,20 @@ class AddressBook(UserDict):
             yield page
 
     def search(self, value):
-        if bool(self.data.get(value)):
-            return self.data.get(value).name
+        result = []
         for record in self.data.values():
+            if re.search(value, record.name.value):
+                result.append(f"{record.name.value}: {record.phones.value}")
             for phone in record.phones:
-                if phone.value == value:
-                    return record
-        raise ValueError("Contact with this value does not exist.")
+                if re.search(value, phone):
+                    result.append(f"{record.name.value}: {record.phones.value}")
+        return result
 
     def save_to_file(self):
         with open(filename, "wb") as pack:
-            pickle.dump(self, pack)
+            pickle.dump(self.data, pack)
         return f'all data was recorded successfully'
 
     def read_from_file(self):
         with open(filename, "rb") as unpack:
-            contacts_dict = pickle.load(unpack)
-            return contacts_dict
+            self.data = pickle.load(unpack)
