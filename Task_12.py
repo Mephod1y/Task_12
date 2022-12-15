@@ -78,8 +78,8 @@ def show_birth(user_input):
 @input_error
 def search(user_input):
     user_input = user_input.split()
-    name = user_input[0]
-    return contacts_dict.search(name)
+    pattern = user_input[0]
+    return contacts_dict.search(pattern)
 
 def save():
     return contacts_dict.save_to_file()
