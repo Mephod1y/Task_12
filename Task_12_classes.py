@@ -108,10 +108,10 @@ class AddressBook(UserDict):
         result = []
         for record in self.data.values():
             if re.search(value, record.name.value):
-                result.append(f"{record.name.value}: {record.phones.value}")
+                result.append(f"{record.name.value}: {', '.join([phone.value for phone in record.phones])}")
             for phone in record.phones:
-                if re.search(value, phone):
-                    result.append(f"{record.name.value}: {record.phones.value}")
+                if re.search(value, phone.value):
+                    result.append(f"{record.name.value}: {', '.join([phone.value for phone in record.phones])}")
         return result
 
     def save_to_file(self):
