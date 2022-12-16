@@ -84,7 +84,8 @@ class Record():
     def days_to_birthday(self):
         today = datetime.today()
         bday = self.birthday.value
-        timediff = (bday - today).days + 1 if (today - bday).days < 0 else (datetime(bday.year + 1, bday.month,bday.day) - today).days + 1
+        nday = datetime(today.year, bday.month, bday.day)
+        timediff = (nday - today).days + 1 if (today - nday).days < 0 else (datetime(nday.year + 1, nday.month, nday.day) - today).days + 1
         return f'{timediff} days till {self.name.value} birthday left!'
 
 class AddressBook(UserDict):
