@@ -31,6 +31,7 @@ def show_all():  # функція повертає всі записи в сло
         contacts += f'\n{name}: '
         for phone in contacts_dict[name].phones:
             contacts += f"{phone.value}"
+        contacts += f" {contacts_dict[name].birthday.value}"
     return contacts
 
 @input_error
